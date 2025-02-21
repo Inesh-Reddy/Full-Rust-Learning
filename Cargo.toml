@@ -1,0 +1,11 @@
+[package]
+name = "rust_full"
+version = "0.1.0"
+edition = "2021"
+
+[workspace]
+members = [
+    "Projects/crate_01_test"
+]
+
+[dependencies]

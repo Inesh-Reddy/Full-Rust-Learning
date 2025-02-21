@@ -1,0 +1,12 @@
+# Ignore Rust build artifacts
+target/
+**/target/
+
+# Ignore Cargo.lock in libraries
+Cargo.lock
+
+# Ignore editor and OS-specific files
+.idea/
+.vscode/
+.DS_Store
+
