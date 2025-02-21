@@ -6,7 +6,9 @@ edition = "2021"
 [workspace]
 members = [
     "Projects/crate_01_test",
-    "Projects/crate_02_variables",
+    "Projects/crate_02_variables", 
+    "Projects/crate_03_conditional_and_loops",
+    
 ]
 
 [dependencies]
