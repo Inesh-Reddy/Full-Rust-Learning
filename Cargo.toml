@@ -7,7 +7,7 @@ edition = "2021"
 members = [
     "Projects/crate_01_test",
     "Projects/crate_02_variables", 
-    "Projects/crate_03_conditional_and_loops", "Projects/crate_04_functions",
+    "Projects/crate_03_conditional_and_loops", "Projects/crate_04_functions", "Projects/crate_05_memory_mgmt",
     
 ]
 
