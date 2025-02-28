@@ -1,6 +1,6 @@
-Rust Learning Path
+# Rust Learning Path
 
-🌱 1. Why Rust Was Created?
+## 🌱 1. Why Rust Was Created?
 
 Rust was designed to offer memory safety, concurrency, and performance without a garbage collector.
 
@@ -8,88 +8,81 @@ Inspired by C/C++, but eliminates common issues like null pointers, data races, 
 
 Used in systems programming, blockchain, game development, and web assembly.
 
-🔹 2. Building Blocks of Rust
+---
 
-Memory Management (Stack & Heap, Ownership, Borrowing, Lifetimes)
+## 🔹 2. Building Blocks of Rust
 
-Primitives (Integers, Floats, Booleans, Characters, Tuples, Arrays)
+- **Memory Management** (Stack & Heap, Ownership, Borrowing, Lifetimes)
+- **Primitives** (Integers, Floats, Booleans, Characters, Tuples, Arrays)
+- **Strings** (String, &str, String::from, Mutability)
+- **Functions** (Normal, Closures, Function Pointers)
+- **Control Flow** (if/else, match, loops)
+- **Structs & Enums**
+- **Traits & Generics**
+- **Concurrency** (Threads, Channels, Async/Await)
 
-Strings (String, &str, String::from, Mutability)
+---
 
-Functions (Normal, Closures, Function Pointers)
+## 📌 3. Rust Memory Management
 
-Control Flow (if/else, match, loops)
+### 3.1 Stack vs Heap
 
-Structs & Enums
+- **Stack**: Fixed-size, fast, used for local variables.
+- **Heap**: Dynamic allocation, slower, used for large or dynamic data.
 
-Traits & Generics
+### 3.2 Ownership Rules
 
-Concurrency (Threads, Channels, Async/Await)
+- Each value has a single owner.
+- Ownership is transferred on assignment.
+- When an owner goes out of scope, value is dropped.
 
-📌 3. Rust Memory Management
+### 3.3 Borrowing & References
 
-3.1 Stack vs Heap
+- **Immutable Borrowing**: `&String` (Read-only access)
+- **Mutable Borrowing**: `&mut String` (One at a time, avoids data races)
+- **Difference from References**: Borrowing follows ownership rules, references do not create a new owner.
 
-Stack: Fixed-size, fast, used for local variables.
+### 3.4 Lifetimes
 
-Heap: Dynamic allocation, slower, used for large or dynamic data.
+- Prevent dangling references.
+- Defined using `'a` (e.g., `fn longest<'a>(x: &'a str, y: &'a str) -> &'a str`)
 
-3.2 Ownership Rules
+---
 
-Each value has a single owner.
+## 🛠 4. Primitive Data Types
 
-Ownership is transferred on assignment.
+### 4.1 Scalar Types
 
-When an owner goes out of scope, value is dropped.
+- **Integer**: `i8, i16, i32, i64, i128, isize`
+- **Float**: `f32, f64`
+- **Boolean**: `bool`
+- **Character**: `char`
 
-3.3 Borrowing & References
+### 4.2 Compound Types
 
-Immutable Borrowing: &String (Read-only access)
+- **Tuple**: `(i32, f64, bool)`
+- **Array**: `[i32; 5]`
 
-Mutable Borrowing: &mut String (One at a time, avoids data races)
+---
 
-Difference from References: Borrowing follows ownership rules, references do not create a new owner.
+## 📝 5. Strings in Rust
 
-3.4 Lifetimes
+### 5.1 String Types
 
-Prevent dangling references.
+- **String (`String`)** – Growable, stored on the heap.
+- **String Slice (`&str`)** – Immutable, borrowed reference.
 
-Defined using 'a (e.g., fn longest<'a>(x: &'a str, y: &'a str) -> &'a str)
+### 5.2 Creating Strings
 
-🛠 4. Primitive Data Types
-
-4.1 Scalar Types
-
-Integer: i8, i16, i32, i64, i128, isize
-
-Float: f32, f64
-
-Boolean: bool
-
-Character: char
-
-4.2 Compound Types
-
-Tuple: (i32, f64, bool)
-
-Array: [i32; 5]
-
-📝 5. Strings in Rust
-
-5.1 String Types
-
-String (String) – Growable, stored on the heap.
-
-String Slice (&str) – Immutable, borrowed reference.
-
-5.2 Creating Strings
-
+```rust
 let s1 = String::from("Hello");
 let s2 = "Hello".to_string();
 let s3 = "Hello"; // &str
+```
 
-5.3 Getting Characters from a String
+### 5.3 Getting Characters from a String
 
+```rust
 let greeting = String::from("Hello, Rust!");
 let char1 = greeting.chars().nth(4);
 
@@ -97,19 +90,25 @@ match char1 {
     Some(c) => println!("Character: {}", c),
     None => println!("No character found"),
 }
+```
 
-🔗 6. Parsing Data (JSON & HTTP Requests)
+---
 
-6.1 Using serde_json for JSON Parsing
+## 🔗 6. Parsing Data (JSON & HTTP Requests)
 
+### 6.1 Using `serde_json` for JSON Parsing
+
+```rust
 use serde_json::Value;
 
 let json_data = r#"{"name": "Alice", "age": 25}"#;
 let parsed: Value = serde_json::from_str(json_data).unwrap();
 println!("Name: {}", parsed["name"]);
+```
 
-6.2 Making an HTTP Request with reqwest
+### 6.2 Making an HTTP Request with `reqwest`
 
+```rust
 use reqwest;
 
 #[tokio::main]
@@ -117,27 +116,35 @@ async fn main() {
     let response = reqwest::get("https://api.github.com").await.unwrap().text().await.unwrap();
     println!("Response: {}", response);
 }
+```
 
-🏗 7. Structs, Enums, and Traits
+---
 
-7.1 Structs
+## 🏗 7. Structs, Enums, and Traits
 
+### 7.1 Structs
+
+```rust
 struct User {
     name: String,
     age: u32,
 }
+```
 
-7.2 Enums
+### 7.2 Enums
 
+```rust
 enum Direction {
     Up,
     Down,
     Left,
     Right,
 }
+```
 
-7.3 Traits (Like Interfaces in OOP)
+### 7.3 Traits (Like Interfaces in OOP)
 
+```rust
 trait Speak {
     fn say_hello(&self);
 }
@@ -149,11 +156,15 @@ impl Speak for Person {
         println!("Hello, Rust!");
     }
 }
+```
 
-⚡ 8. Concurrency & Async in Rust
+---
 
-8.1 Using Threads
+## ⚡ 8. Concurrency & Async in Rust
 
+### 8.1 Using Threads
+
+```rust
 use std::thread;
 
 fn main() {
@@ -162,9 +173,11 @@ fn main() {
     });
     handle.join().unwrap();
 }
+```
 
-8.2 Async/Await (With tokio)
+### 8.2 Async/Await (With `tokio`)
 
+```rust
 use tokio::time::sleep;
 use std::time::Duration;
 
@@ -173,11 +186,15 @@ async fn main() {
     sleep(Duration::from_secs(1)).await;
     println!("Async Done!");
 }
+```
 
-🔥 9. Error Handling
+---
 
-9.1 Using Result<T, E>
+## 🔥 9. Error Handling
 
+### 9.1 Using `Result<T, E>`
+
+```rust
 fn divide(a: i32, b: i32) -> Result<i32, String> {
     if b == 0 {
         Err("Cannot divide by zero".to_string())
@@ -185,12 +202,16 @@ fn divide(a: i32, b: i32) -> Result<i32, String> {
         Ok(a / b)
     }
 }
+```
 
-9.2 Using ? Operator
+### 9.2 Using `?` Operator
 
+```rust
 fn read_file() -> std::io::Result<String> {
     std::fs::read_to_string("file.txt")
 }
+```
 
+---
 
-
+## 🎯 Happy Coding in Rust! 🚀
